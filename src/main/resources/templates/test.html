@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body xmlns:th="http://www.thymeleaf.org">
+<tr th:if="${drugListKey.isEmpty()}">
+    <td colspan="2"> No Drugs Available </td>
+</tr>
+<tr th:each="drug : ${drugListKey}">
+    <td><span th:text="${drug.name}"> Name </span></td>
+    <td><span th:text="${drug.drugCode}"> Code </span></td>
+    <td><span th:text="${drug.cost}"> Cost </span></td>
+    <td><span th:text="${drug.description}"> Description </span></td>
+
+    <html>
+    <head>
+        <title>Title of the document</title>
+    </head>
+    <body>
+    <button onclick="window.location.href = 'localhost/8080/';">Click Here</button>
+    </body>
+    </html>
+</tr>
+</body>
+</html>
