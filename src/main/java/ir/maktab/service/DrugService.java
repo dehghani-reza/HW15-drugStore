@@ -36,9 +36,10 @@ public class DrugService {
 
     public Drug editDrug(Long id , Drug drug) throws Exception {
         Drug byId = findById(id);
-
         if(drug.getName()!=null){
-            byId.setName(drug.getName());
+            if(!drug.getName().equals("")) {
+                byId.setName(drug.getName());
+            }
         }
         if(drug.getDrugCode()!=null){
             byId.setDrugCode(drug.getDrugCode());
@@ -47,8 +48,11 @@ public class DrugService {
             byId.setCost(drug.getCost());
         }
         if(drug.getDescription()!=null){
-            byId.setDescription(drug.getDescription());
+            if(!drug.getDescription().equals("")){
+                byId.setDescription(drug.getDescription());
+            }
         }
+        System.out.println(byId);
         return saveDrug(byId);
     }
 

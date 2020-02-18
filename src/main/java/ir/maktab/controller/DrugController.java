@@ -26,12 +26,12 @@ public class DrugController {
     }
 
     @GetMapping(value = "/add_drug")
-    public String findDrugById() {
+    public String loadDrugSavePage() {
         return "add_drug_view";
     }
 
     @PostMapping(value = "/add_drug_to_db")
-    public String findDrugById(HttpServletRequest request, ModelMap map) {
+    public String loadDrugSavePage(HttpServletRequest request, ModelMap map) {
         Drug drug = app.getBean("drug", Drug.class);
         drug.setName(request.getParameter("name"));
         drug.setDrugCode(Long.valueOf(request.getParameter("Code")));
@@ -48,4 +48,35 @@ public class DrugController {
         model.addAttribute("drugListKey",drugList);
         return "show_all_drugs";
     }
+
+    @GetMapping("/load_drug_for_edit")
+    public String editDrugById(@RequestParam(value = "id") final Long id , Model model) {
+        try {
+            Drug drug = drugService.findById(id);
+            model.addAttribute("goingToEditDrug" , drug);
+            model.addAttribute("newDrug" , app.getBean("drug"));
+        } catch (Exception e) {
+            model.addAttribute("subject" , e);//Todo error handler and thymeleaf
+            return "error";
+        }
+        return "edit_drug";
+    }
+    @PostMapping(value = "/edit_drug_to_db")
+    public String editDrugSavePage(@ModelAttribute Drug drug , @RequestParam(value = "id") final Long id , Model model) {
+        try {
+            drugService.editDrug(id,drug);
+        } catch (Exception e) {
+            e.printStackTrace();//todo exception
+        }
+        model.addAttribute("drugListKey",drugService.loadAllDrug());
+        return "show_all_drugs";
+    }
+
+    @RequestMapping(value = "/delete_drug_from_db")
+    public String deleteByDrugById(@RequestParam(value = "id") final Long id,Model model){
+        drugService.deleteDrug(id);
+        model.addAttribute("drugListKey",drugService.loadAllDrug());
+        return "show_all_drugs";
+    }
+
 }

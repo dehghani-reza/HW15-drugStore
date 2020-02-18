@@ -15,32 +15,28 @@
 
 <div class="container">
     <h1>Drugs List</h1>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Drug Code</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Description</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Remove</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${drugListKey.isEmpty()}">
-            <td colspan="2"> No Drugs Available </td>
-        </tr>
-        <tr th:each="drug : ${drugListKey}">
-            <td><span th:text="${drug.name}"> Name </span></td>
-            <td><span th:text="${drug.drugCode}"> Code </span></td>
-            <td><span th:text="${drug.cost}"> Cost </span></td>
-            <td><span th:text="${drug.description}"> Description </span></td>
-            <td><button type="button" class="btn btn-warning" onclick="window.location.href = '/';">Edit</button></td>
-            <td><button type="button" class="btn btn-danger">Remove</button></td>
-        </tr>
-
-        </tbody>
-    </table>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Drug Code</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Description</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="drug : ${drugListKey}">
+                <td><span th:text="${drug.name}"> Name </span></td>
+                <td><span th:text="${drug.drugCode}"> Code </span></td>
+                <td><span th:text="${drug.cost}"> Cost </span></td>
+                <td><span th:text="${drug.description}"> Description </span></td>
+                <td><a style="color: orangered" th:href="@{/drug/load_drug_for_edit(id=${drug.id})}">Edit</a></td>
+                <td><a style="color: crimson" th:href="@{/drug/delete_drug_from_db(id=${drug.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
 </div>
 
 

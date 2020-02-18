@@ -17,5 +17,5 @@ public class PatientController {
         this.app = app;
     }
 
-    //Todo
+
 }

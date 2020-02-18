@@ -18,16 +18,16 @@
         <form action="/drug/add_drug_to_db" method="post">
             <div class="form-group">
                 <label for="name">Drug Name</label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="نام دارو" required>
+                <input type="text" class="form-control" name="name" id="name" placeholder="نام دارو" required dir="rtl">
             </div>
             <div class="form-group">
                 <label for="Code">Drug Code</label>
-                <input type="number" class="form-control" name="Code" id="Code" placeholder="کد دارو" required>
+                <input type="number" class="form-control" name="Code" id="Code" placeholder="کد دارو" required dir="rtl">
             </div>
             <div class="form-group">
                 <label for="Cost">Cost</label>
                 <input type="number" class="form-control" name="Cost" id="Cost" placeholder="قیمت به ریال" step="0.001"
-                       required>
+                       required dir="rtl">
             </div>
             <div class="form-group">
                 <label for="Description">Description</label>
@@ -37,11 +37,12 @@
                 <button type="submit" class="btn btn-success">Save</button>
                 <button type="reset" class="btn btn-danger">Cancel</button>
             </div>
+            <br>
+            <br>
             <tr th:if="${saved!=null}">
                 <p colspan="2" style="color: green"><span th:text="${saved.name}"></span> saved successfully</p>
             </tr>
         </form>
-        <br>
         <a href="/">Back to Home</a>
     </div>
 </div>
