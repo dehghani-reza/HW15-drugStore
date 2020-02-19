@@ -33,8 +33,8 @@
                 <td><span th:text="${patient.lastName}"> LastName </span></td>
                 <td><span th:text="${patient.gender}"> Gender </span></td>
                 <td><a style="color: purple" th:href="@{/patient/load_patient_by_id(id=${patient.patientId})}">Detail</a></td>
-                <td><a style="color: orangered" th:href="@{/drug/load_drug_for_edit(id=${patient.patientId})}">Edit</a></td>
-                <td><a style="color: crimson" th:href="@{/drug/delete_drug_from_db(id=${patient.patientId})}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                <td><a style="color: orangered" th:href="@{/patient/load_patient_for_edit(id=${patient.patientId})}">Edit</a></td>
+                <td><a style="color: crimson" th:href="@{/patient/delete_patient_from_db(id=${patient.patientId})}" onclick="return confirm('Are you sure?')">Delete</a></td>
             </tr>
             </tbody>
         </table>

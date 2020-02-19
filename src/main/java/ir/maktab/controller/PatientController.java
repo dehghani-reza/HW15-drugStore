@@ -55,4 +55,35 @@ public class PatientController {
         }
         return "patient_detail";
     }
+
+    @GetMapping("/load_patient_for_edit")
+    public String editDrugById(@RequestParam(value = "id") final Long id , Model model) {
+        try {
+            Patient patient = patientService.findById(id);
+            model.addAttribute("goingToEditPatient" , patient);
+            model.addAttribute("newPatient" , app.getBean("patient"));
+        } catch (Exception e) {
+            model.addAttribute("subject" , e);//Todo error handler and thymeleaf
+            return "error";
+        }
+        return "edit_patient";
+    }
+
+    @PostMapping(value = "/edit_patient_to_db")
+    public String editDrugSavePage(@ModelAttribute Patient patient , @RequestParam(value = "id") final Long id , Model model) {
+        try {
+            patientService.editPatient(id,patient);
+        } catch (Exception e) {
+            e.printStackTrace();//todo exception
+        }
+        model.addAttribute("patientListKey",patientService.loadAllPatient());
+        return "show_all_patients";
+    }
+
+    @RequestMapping(value = "/delete_patient_from_db")
+    public String deleteByDrugById(@RequestParam(value = "id") final Long id,Model model){
+        patientService.deletePatient(id);
+        model.addAttribute("patientListKey",patientService.loadAllPatient());
+        return "show_all_patients";
+    }
 }

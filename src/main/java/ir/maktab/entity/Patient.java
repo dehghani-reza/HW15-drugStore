@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +25,7 @@ public class Patient {
     private String gender;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient" )
-    private List<Prescription> prescriptionList;
+    private List<Prescription> prescriptionList = new ArrayList<>();
 
     //*********************************
 
