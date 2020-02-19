@@ -10,34 +10,45 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hello, world!</title>
+    <title>Patient Detail</title>
 </head>
 <body class="ininin" xmlns:th="http://www.thymeleaf.org">
 
 <div class="container">
-    <h1>Drugs List</h1>
-        <table class="table table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Drug Code</th>
-                <th scope="col">Cost</th>
-                <th scope="col">Description</th>
-                <th scope="col">Edit</th>
-                <th scope="col">Remove</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="drug : ${drugListKey}">
-                <td><span th:text="${drug.name}"> Name </span></td>
-                <td><span th:text="${drug.drugCode}"> Code </span></td>
-                <td><span th:text="${drug.cost}"> Cost </span></td>
-                <td><span th:text="${drug.description}"> Description </span></td>
-                <td><a style="color: orangered" th:href="@{/drug/load_drug_for_edit(id=${drug.id})}">Edit</a></td>
-                <td><a style="color: crimson" th:href="@{/drug/delete_drug_from_db(id=${drug.id})}" onclick="return confirm('Are you sure?')">Delete</a></td>
-            </tr>
-            </tbody>
-        </table>
+    <h1 th:each="patient1:${loadedPatient}"><span th:text="${patient1.lastName}"></span> Detail</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Gender</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${loadedPatient}">
+            <td><span th:text="${patient.name}"> Name </span></td>
+            <td><span th:text="${patient.lastName}"> LastName </span></td>
+            <td><span th:text="${patient.gender}"> Gender </span></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">prescriptionCode</th>
+            <th scope="col">issueDate</th>
+            <th scope="col">referralDate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr  th:each="prescription :${loadedPatient.prescriptionList}">
+            <td><span th:text="${prescription.prescriptionCode}"> PrescriptionCode </span></td>
+            <td><span th:text="${prescription.issueDate}"> IssueDate </span></td>
+            <td><span th:text="${prescription.referralDate}"> ReferralDate </span></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

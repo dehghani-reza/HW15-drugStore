@@ -1,0 +1,15 @@
+.totototo {
+    background-image: url("../static/Untitled-1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.ininin{
+    background-image: url("../static/back2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-origin: revert;
+    background-size: 120%;
+    background-color: black;
+}

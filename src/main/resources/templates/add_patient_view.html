@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Patient</title>
+    <!-- Required meta tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/jquery-3.3.1.min.js"></script>
+    <link rel="icon" href="http://example.com/favicon.png">
+    <script>
+        let PrescriptionCode = 0;
+        $(document).ready(function () {
+            $("#repeat").click(function () {
+                $("#repeatable").append(" <div id='row' class=\"form-row\" >\n" +
+                    "                    <div class=\"form-group col-md-3\">\n" +
+                    "                        <label for=\"name\">Prescription Code</label>\n" +
+                    "                        <input type=\"number\" class=\"form-control\" name=\"PrescriptionCode\" id='PrescriptionCode'  placeholder=\"کد نسخه\" required dir=\"rtl\">\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"form-group col-md-3\">\n" +
+                    "                        <label for=\"FamilyName\">Issue Date</label>\n" +
+                    "                        <input type=\"date\" class=\"form-control\" name=\"issueDate\" id=\"issueDate\" required dir=\"rtl\">\n" +
+                    "                    </div>\n" +
+                    "                    <div class=\"form-group col-md-3\">\n" +
+                    "                        <label for=\"Gender\">Referral Date</label>\n" +
+                    "                        <input type=\"date\" class=\"form-control\" name=\"referralDate\" id=\"referralDate\" required dir=\"rtl\">\n" +
+                    "                    </div>\n" +
+                    "                    <div style=\"display: flex ;justify-content: end;align-items: center;\" >\n" +
+                    "                        <button type=\"button\" id=\"delete\" class=\"btn btn-outline-danger btn-sm\">Remove -</button>\n" +
+                    "                    </div>\n" +
+                    "                </div>");
+
+
+                document.getElementById("PrescriptionCode").setAttribute("id", "PrescriptionCode" + PrescriptionCode++);
+                document.getElementById("row").setAttribute("id", "row" + PrescriptionCode++);
+            });
+            $("#delete").click(function () {
+                $("#row").hide();
+            });
+        });
+    </script>
+</head>
+<body xmlns:th="http://www.thymeleaf.org">
+
+<div class="container" style="width: 50% ; padding-top: 2%">
+    <h1>Patient Manager:</h1>
+    <div style="padding: 1%">
+
+        <form th:action="@{/patient/save}" method="post" th:object="${patient}">
+            <div class="form-group">
+                <label for="name">Patient Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="نام بیمار" required dir="rtl"
+                       th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="FamilyName">Patient LastName</label>
+                <input type="text" class="form-control" name="familyName" id="familyName" placeholder="نام خانوادگی"
+                       required dir="rtl" th:field="*{lastName}">
+            </div>
+            <div class="form-group">
+                <label for="Gender">Gender</label>
+                <select class="form-control" name="Gender" id="Gender" required th:selected="*{gender}">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+            </div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+            <br>
+            <br>
+            <h2 style="color: gray">prescriptions:</h2>
+            <hr>
+            <div style="display: flex ;justify-content:space-between;">
+                <p style="color: darkgray">You should define one prescription at least</p>
+                <button type="button" id="repeat" class="btn btn-outline-primary btn-sm">Add Prescription +</button>
+            </div>
+            <br>
+            <br>
+            <div id="repeatable" th:object="${prescriptions}">
+                <div id="row" class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="name">Prescription Code</label>
+                        <input type="number" class="form-control" name="PrescriptionCode" id="PrescriptionCode"
+                               placeholder="کد نسخه" dir="rtl" th:field="*{prescriptionCode}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="FamilyName">Issue Date</label>
+                        <input type="date" class="form-control" name="issueDate" id="issueDate" dir="rtl" th:field="*{issueDate}">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="Gender">Referral Date</label>
+                        <input type="date" class="form-control" name="referralDate" id="referralDate" dir="rtl" th:field="*{referralDate}">
+                    </div>
+<!--                    <div style="display: flex ;justify-content: end;align-items: center;">-->
+<!--                        <button type="button" id="delete" class="btn btn-outline-danger btn-sm">Remove -</button>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <tr th:if="${saved!=null}">
+                <p colspan="2" style="color: greenyellow" ><span th:text="${saved.name}"></span> saved successfully</p>
+            </tr>
+
+        </form>
+        <a href="/">Back to Home</a>
+    </div>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>

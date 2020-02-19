@@ -19,9 +19,9 @@ public class Prescription {
     @Column(unique = true , nullable = false)
     private Long prescriptionCode;
 
-    private LocalDate issueDate;
+    private String issueDate;
 
-    private LocalDate referralDate;
+    private String referralDate;
 
     @ManyToOne
     @JoinColumn(name = "patientId")
@@ -50,19 +50,19 @@ public class Prescription {
         this.prescriptionCode = prescriptionId;
     }
 
-    public LocalDate getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(LocalDate issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
-    public LocalDate getReferralDate() {
+    public String getReferralDate() {
         return referralDate;
     }
 
-    public void setReferralDate(LocalDate referralDate) {
+    public void setReferralDate(String referralDate) {
         this.referralDate = referralDate;
     }
 

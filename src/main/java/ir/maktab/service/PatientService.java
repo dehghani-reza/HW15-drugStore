@@ -61,4 +61,8 @@ public class PatientService {
         }
         return savePatient(byId);
     }
+
+    public Prescription prescriptionSave(Prescription prescription){
+       return prescriptionDao.save(prescription);
+    }
 }

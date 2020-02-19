@@ -20,10 +20,10 @@ public class Patient {
 
     private String lastName;
 
-    @Enumerated(value = EnumType.STRING)
-    private Gender gender;
+//    @Enumerated(value = EnumType.STRING)
+    private String gender;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient" )
     private List<Prescription> prescriptionList;
 
     //*********************************
@@ -52,11 +52,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(Gender gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
