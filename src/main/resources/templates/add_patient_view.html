@@ -51,7 +51,7 @@
     <h1>Patient Manager:</h1>
     <div style="padding: 1%">
 
-        <form th:action="@{/patient/save}" method="post" th:object="${patient}">
+        <form th:action="@{/patient/save}" method="post" th:object="${patient}"  style="background: rgba(255,255,255,0.9);">
             <div class="form-group">
                 <label for="name">Patient Name</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="نام بیمار" required dir="rtl"
@@ -104,7 +104,7 @@
                 </div>
             </div>
             <tr th:if="${saved!=null}">
-                <p colspan="2" style="color: greenyellow" ><span th:text="${saved.name}"></span> saved successfully</p>
+                <p colspan="2" style="color: green" ><span th:text="${saved.name}"></span> saved successfully</p>
             </tr>
 
         </form>

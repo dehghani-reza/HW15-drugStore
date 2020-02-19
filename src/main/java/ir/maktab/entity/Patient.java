@@ -24,7 +24,7 @@ public class Patient {
 //    @Enumerated(value = EnumType.STRING)
     private String gender;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "patient" )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patient" )
     private List<Prescription> prescriptionList = new ArrayList<>();
 
     //*********************************

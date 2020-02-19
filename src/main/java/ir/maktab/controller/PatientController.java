@@ -36,6 +36,8 @@ public class PatientController {
         prescription.setPatient(patient);
         patientService.prescriptionSave(prescription);
         model.addAttribute("saved",patient);
+        model.addAttribute("patient", app.getBean("patient"));
+        model.addAttribute("prescriptions", app.getBean("prescription"));
         return "add_patient_view";
     }
     @GetMapping(value = "load_all_patient")
@@ -81,7 +83,12 @@ public class PatientController {
     }
 
     @RequestMapping(value = "/delete_patient_from_db")
-    public String deleteByDrugById(@RequestParam(value = "id") final Long id,Model model){
+    public String deleteById(@RequestParam(value = "id") final Long id,Model model){
+        try {
+            System.out.println(patientService.findById(id));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         patientService.deletePatient(id);
         model.addAttribute("patientListKey",patientService.loadAllPatient());
         return "show_all_patients";
